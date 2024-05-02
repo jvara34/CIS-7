@@ -1,0 +1,46 @@
+*DONE* void function greet(int size, bool duplicates)
+{
+    1) Program will great the user 
+
+    2) Ask the user if they would allow duplicates in the array 
+
+    3) Ask the user how long they could choose from 4, 6, 8
+
+    pass by reference the value so no return 
+}
+
+void generatedArr(int len)
+{
+    - create and array that will have the same length of the one that takes in user input 
+    - Will need a random num generator to help fill in the array 
+
+}
+
+void compareArr()
+{
+    - this function will compare the user input array with the other array from the random generatedArr 
+}
+
+display arr filled with x's 
+    have a counter variable that lets the user know how many tries they have left guessing 
+    Also displa the coutner variable so that the user knows how many tries they have left 
+
+
+ 
+
+
+
+Functionality of the array and how it should be used 
+- Uses a char array to swap the data 
+- the array is filled with x's then swapped with the input from user 
+    - if that user input is correct it there is a variable that lets the user know if it is "1-4" 
+- The program needs two arays because it then I compare the correct array with the input array 
+
+
+To-do LATER
+- Format with the iomanip library to make program look nice and pretty 
+
+
+Questions? 
+- How to get the user input from c++ in a single line but multiple inputs?
+    - or should i get the user input for each element of the array? 
