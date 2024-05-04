@@ -34,10 +34,6 @@ int main()
     char arr[len];                              // This array is the user array 
     char genArr[len];                           // This array is the one that has the code 
     generatedArr(genArr, len, dup);             // Generates a random Array that will be compared to the input array to win   
-    for(int i = 0; i < len; i++)
-    {
-        cout << genArr[i];
-    }
     for(int i = 0; i < tries; i++)
     {
         fillArr(arr, len);                      // Fills up the array to have with the length that the user chose   
