@@ -9,26 +9,54 @@
     pass by reference the value so no return 
 }
 
-void generatedArr(int len)
+*DONE* void generatedArr(int len) 
 {
     - create and array that will have the same length of the one that takes in user input 
     - Will need a random num generator to help fill in the array 
-
+    - Takes in the dup input from the user to determine if the array will have duplicates or will not have duplicates 
 }
 
-void compareArr()
+*DONE* void compareArr()
 {
     - this function will compare the user input array with the other array from the random generatedArr 
+    - Also output the amount of numbers that is correct 
+    - Have a variable that gets the first element of the generatedArr and then compares that value to each element in the other user arr
+    - and so on and so on ... 
+    - If both arrays are correct then it will send the user to win()
+
+
+    - Need a variable that will compare each element of the generatedArr with the user arr and count how many is right 
+    - Use two if statments to determine correct spot for the arrays so the user knows that some numbers are in the correct spot  
+
+    - two for loops the first one iterates through the generatedArr 
+        - second loop checks if the generatedArr is in the user array 
+
+        ORRR 
+
+    one for loop and then a binary search for the speed 
 }
 
-display arr filled with x's 
-    have a counter variable that lets the user know how many tries they have left guessing 
-    Also displa the coutner variable so that the user knows how many tries they have left 
+
+
+
+*DONE* display()
+{
+    - the display function will only display a rectangle of x's to let the user know how many tries they have left 
+    - with every move that the player makes the length of the x's will decrease by 1 to show that they have less tries 
+}  
+
 
 
  
 
 
+
+
+*TO-DO LATER* void win()
+{
+    - this function is just to congrajulate the user on winning 
+    - also ask if they would like to play again 
+}
 
 Functionality of the array and how it should be used 
 - Uses a char array to swap the data 
@@ -39,6 +67,8 @@ Functionality of the array and how it should be used
 
 To-do LATER
 - Format with the iomanip library to make program look nice and pretty 
+- Fix the Wrong spot variable since it is not counting correctly 
+- Fix duplicate because I think it is not working properly 
 
 
 Questions? 
