@@ -18,6 +18,7 @@ void display(char [], int, int &, int, int);
 void generatedArr(char [], int, bool);    // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(char [], char [], int, int &, int &);
 void win(); 
+void lose(char [], int); 
 
 int main()
 {
@@ -34,17 +35,17 @@ int main()
     char arr[len];                              // This array is the user array 
     char genArr[len];                           // This array is the one that has the code 
     generatedArr(genArr, len, dup);             // Generates a random Array that will be compared to the input array to win   
-    for(int i = 0; i < tries; i++)
+    for(int i = 0; i <= 10; i++)
     {
         fillArr(arr, len);                      // Fills up the array to have with the length that the user chose   
         if(compareArr(genArr, arr, len, amCor, coSpot))
         {
             win(); 
             break;
-        }                             
+        }                        
         display(arr, len, tries, amCor, coSpot);                   // This will display an array of x's and the amount of tries that is left for the user to play
-        
-    }            
+    }
+    lose(genArr, len);
      
 }
 
@@ -100,7 +101,7 @@ void generatedArr(char genArr[],int len, bool dup)
     {
         for (int i = 0; i < len; i++)       // This for loop for randnums is good if user chooses dupplicates 
         {
-            genArr[i] = (rand() % 10) + '0';
+            genArr[i] = (rand() % len) + '0';
         }
     } else if( dup == false)
     {
@@ -156,7 +157,7 @@ bool compareArr(char genArr[], char arr[], int len, int &amCor, int &coSpot)
         compare = genArr[i];
         for(int j = 0; j < len; j++)
         {
-            if(compare == arr[i])
+            if(compare == arr[j])
             {
                 amCor ++; 
             }
@@ -169,4 +170,14 @@ bool compareArr(char genArr[], char arr[], int len, int &amCor, int &coSpot)
 void win()
 {
     cout << "You WIN!!" << endl; 
+}
+
+void lose(char genArr[], int len)
+{
+    cout << "You Lost!" << endl; 
+    cout << "The code was ... " << endl; 
+    for (int i = 0; i < len; i++)
+    {
+        cout << genArr[i] << " ";
+    }
 }

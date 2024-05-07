@@ -36,39 +36,35 @@
     one for loop and then a binary search for the speed 
 }
 
-
-
-
 *DONE* display()
 {
     - the display function will only display a rectangle of x's to let the user know how many tries they have left 
     - with every move that the player makes the length of the x's will decrease by 1 to show that they have less tries 
 }  
 
-
-
- 
-
-
-
-
-*TO-DO LATER* void win()
+*DONE* void win()
 {
     - this function is just to congrajulate the user on winning 
     - also ask if they would like to play again 
 }
 
+*DONE* void lose()
+{
+    - this functions tells user they lost and also prints outs the correct code 
+}
+
+
+
+
 Functionality of the array and how it should be used 
-- Uses a char array to swap the data 
-- the array is filled with x's then swapped with the input from user 
     - if that user input is correct it there is a variable that lets the user know if it is "1-4" 
 - The program needs two arays because it then I compare the correct array with the input array 
 
 
 To-do LATER
 - Format with the iomanip library to make program look nice and pretty 
-- Fix the Wrong spot variable since it is not counting correctly 
 - Fix duplicate because I think it is not working properly 
+    - Maybe remove the duplicates in the array or try to make an generated random array not print extra values 
 
 
 Questions? 
