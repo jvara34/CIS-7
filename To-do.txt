@@ -54,6 +54,20 @@
 }
 
 
+Create own A.I. 
+1) Finad all 4 digits should be 1-9 guess 
+    0000
+    .
+    .
+    .
+    8888
+
+2) locate first digit should be 1-3 guess 
+
+3) located 2nd digit should be 1-3 guess 
+
+
+
 
 
 Functionality of the array and how it should be used 
