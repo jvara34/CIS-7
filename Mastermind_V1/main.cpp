@@ -33,8 +33,8 @@ int main()
     greetUser(len, dup);
 
     char arr[len];                              // This array is the user array 
-    char genArr[len];                           // This array is the one that has the code 
-    generatedArr(genArr, len, dup);             // Generates a random Array that will be compared to the input array to win   
+    char genArr[len] = {'3', '0', '6', '6'};                           // This array is the one that has the code 
+    // generatedArr(genArr, len, dup);             // Generates a random Array that will be compared to the input array to win   
     for(int i = 0; i <= 10; i++)
     {
         fillArr(arr, len);                      // Fills up the array to have with the length that the user chose   
@@ -93,7 +93,7 @@ void display(char arr[], int len, int &tries, int amCor, int coSpot)
     tries --; 
 }
 
-void generatedArr(char genArr[],int len, bool dup)
+/*void generatedArr(char genArr[],int len, bool dup)
 {
     bool hasDup; 
     
@@ -130,9 +130,9 @@ void generatedArr(char genArr[],int len, bool dup)
     }
    
 }
+*/
 
-
-bool compareArr(char genArr[], char arr[], int len, int &amCor, int &coSpot)
+bool compareArr(char code[], char arr[], int len, int &amCor, int &coSpot)
 {
      
     amCor = 0;      // These two integer functions need to be reset everytime the function is called 
@@ -140,24 +140,24 @@ bool compareArr(char genArr[], char arr[], int len, int &amCor, int &coSpot)
     int compare = 0; 
     bool isSame = true;
 
-    for(int i = 0; i < len; i++)
+    for(int i = 0; i < len; i++) // Finds the correct Spot 
     {
-        if(arr[i] != genArr[i])
+        if(arr[i] != code[i])
         {
             isSame = false; 
         }
-        else if(arr[i] == genArr[i])
+        else if(arr[i] == code[i])
         { 
             coSpot ++; 
         }
 
     }
-    for(int i = 0; i < len; i++)
+    for(int i = 0; i < len; i++) //  Finds the right number wrong spot 
     {
-        compare = genArr[i];
+        compare = code[i];
         for(int j = 0; j < len; j++)
         {
-            if(compare == arr[j])
+            if((compare == arr[j]) && (i != j))
             {
                 amCor ++; 
             }
