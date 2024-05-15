@@ -8,9 +8,6 @@ Code = the code that the player has to guess
 This program does not need to have duplicates asked for  
 
 
-the AI will just increment +1 every time until it gets the correct value 
-
-
-that Code max the code could be is 9999 
-
-Also this promgram does not ask for the length of the code it will always be 4 
+*NEED TO DO* 
+- create a char array that increases by 1 from 0000 - 9999 
+- create a compareArr function that will get the compare the two functions in my own way not using profs function 

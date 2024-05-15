@@ -14,10 +14,10 @@
 
 using namespace std; 
 
-string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
-bool compareArr(string, string, int, int &, int &);
-string AI();
-void code_break(string string, int, int);
+void generatedArr(char [], int);                            // This functions creates the generated Arr that will have the code the user has to guess 
+bool compareArr(char [], char [], int, int &, int &);
+void AI(char []);
+
 
 
 int main()
@@ -27,39 +27,24 @@ int main()
     int tries = 10;
     int amCor = 0;      // amCor = right # wrong place
     int coSpot = 0;     // coSpot = correct spot  
-    string guess, code; 
-    int choice = 0; 
+    char sGuess [len]; 
+    char code [len]; 
+   string guess, CODE; 
 
     srand(time(NULL));              // Generates Random Number 
 
-   
-    code = generatedArr(len);             // Generates a random Array that will be compared to the input array to win  
-    
-    cout << "Hello User this program will guess a code by going from 0000-9999 " << endl; 
-    cout << "1) Break the code " << endl; 
-    cout << "2) Loop to 9999 " << endl;
-    cin >> choice; 
-    if (choice == 1)
-    {
-        cout << "Code Guess #right #right in wrong spot Sum" << endl; 
-        do{
-            guess=AI();
-            compareArr(code, guess, len, amCor, coSpot);
-            cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
-        }while(compareArr(code, guess, len, amCor, coSpot));
-        cout << "The code was " << code; 
-    }
-    else if (choice == 2)
-    {
+    generatedArr(code, len);
+          // Generates a random Array that will be compared to the input array to win  
+  
         cout << "Code Guess #right #right in wrong spot Sum" << endl; 
         for (int i = 0; i < 10000; i++)
         {
-            guess = AI(); 
-            compareArr(code, guess, len, amCor, coSpot);
-            cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
+            AI(sGuess); 
+            
+            compareArr(code, sGuess, len, amCor, coSpot);
+            cout << code << " " << sGuess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
         
         }
-    }
 
      
 }
@@ -67,18 +52,19 @@ int main()
 
 
 
-string generatedArr(int len)
+void generatedArr(char code[], int len)
 {   
-    string code = "0000";
+   
+
     for (int i = 0; i < len; i++)       // for loop generates a random number 
     {
         code[i] = rand() % len + '0';
     }
-    return code; 
+     
 }
 
 
-bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
+bool compareArr(char code[], char sGuess[], int len, int &amCor, int &coSpot)
 {
      
     amCor = 0;      // These two integer functions need to be reset everytime the function is called 
@@ -88,10 +74,10 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
 
     for(int i = 0; i < len; i++)
     {
-        if(guess[i] == code[i])
+        if(sGuess[i] == code[i])
         { 
             check[i] = 'x';
-            guess[i] = 'x';
+            sGuess[i] = 'x';
             coSpot++; 
         }
     }
@@ -99,7 +85,7 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
     {
         for(int j = 0; j < len; j++)
         {
-            if((i != j) && (code[j] == guess[i]) && (check[j] == ' '))
+            if((i != j) && (code[j] == sGuess[i]) && (check[j] == ' '))
             {
                 check[j] = 'x';
                 amCor ++; 
@@ -118,11 +104,10 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
 }
 
 
-string AI()
+void AI(char sGuess[])
 {
     static int guess=-1;
     guess++; 
-    string sGuess = "0000";
     int n1000=(guess-guess%1000)/1000;
     int n100=(guess%1000-guess%100)/100;
     int n10=(guess%100-guess%10)/10;
@@ -132,6 +117,5 @@ string AI()
     sGuess[1]=n100+'0';
     sGuess[2]=n10+'0';
     sGuess[3]=n1+'0';
-    return sGuess;
 }
 
