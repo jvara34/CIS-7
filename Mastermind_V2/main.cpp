@@ -21,8 +21,12 @@ void AI(char []);
 
 
 int main()
-{
+{   
+    
     const int len = 4; 
+    int counterRight[len];
+    int counterWrong[len];
+    int right, rightWrong; 
     bool dup;
     int tries = 10;
     int amCor = 0;      // amCor = right # wrong place
@@ -43,14 +47,50 @@ int main()
             
             compareArr(code, sGuess, len, amCor, coSpot);
             cout << code << " " << sGuess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
-        
+                if (coSpot == 1)
+                {
+                    counterRight[0] += 1; 
+                } else if (coSpot == 2)
+                {
+                    counterRight[1] += 1;
+                } else if (coSpot == 3)
+                {
+                    counterRight[2] += 1;
+                } else if (coSpot == 4)
+                {
+                    counterRight[3] += 1;
+                }
+
+                if (amCor == 1)
+                {
+                    counterWrong[0] += 1;
+                } else if (amCor == 2)
+                {
+                    counterWrong[1] += 1;
+                } else if (amCor == 3)
+                {
+                    counterWrong[2] += 1;
+                } else if (amCor == 4)
+                {
+                    counterWrong[3] += 1;
+                }
+                
+                
         }
+
+        for (int i = 0; i < len; i++)
+        {
+            cout << "Number Right in Position: " << counterRight[i] << endl;
+        }
+
+        for (int i = 0; i < len; i++)
+        {
+            cout << "Number Right Wrong in Position: " << counterWrong[i] << endl;
+        }
+
 
      
 }
-
-
-
 
 void generatedArr(char code[], int len)
 {   
