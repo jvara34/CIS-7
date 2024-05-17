@@ -4,12 +4,21 @@ using namespace std;
 
 int main()
 {
-    int rightArr[5] = {0, 0, 0, 0, 0};
+    int counterGuess = 0;
 
-    rightArr[3] += 1; 
-
-    for(int i = 0; i < 5; i++)
+    while(counterGuess < 10)
     {
-        cout << rightArr[i] << endl;
-    }
+        string guess = "0000";
+        guess[0] = counterGuess + '0'; 
+        guess[1] = counterGuess + '0';  
+        guess[2] = counterGuess + '0';  
+        guess[3] = counterGuess + '0'; 
+
+        counterGuess++;
+
+        cout << guess << endl; 
+    } 
+     
+
+ 
 }
