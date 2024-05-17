@@ -1,0 +1,9 @@
+This program will use an AI that I will create and will guess from 0000 and incremeant
+by 1111 and search each element to see if the code matches at that certain element if not
+continue to 2222 
+
+so it should look like this 
+
+guess: 0000 Code: 0120 -> from this line it should find the first and last element to be 0 
+guess: 1111 Code: 0120 -> from this line it should find second element to be 1 
+guess: 2222 Code: 0120 -> from this line it should find third element to be 2 
