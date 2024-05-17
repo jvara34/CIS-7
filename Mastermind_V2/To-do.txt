@@ -9,6 +9,5 @@ This program does not need to have duplicates asked for
 
 
 *NEED TO DO* 
-- create a char array that increases by 1 from 0000 - 9999 
-- create a compareArr function that will get the compare the two functions in my own way not using profs function 
-- Counter the time that the right position is 4, 3, 2 and for the wrong position 
+- create an AI that increaments from 0000 to 9999 
+    - need to cast as a string to work with compareArr function 
