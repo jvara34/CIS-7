@@ -19,7 +19,7 @@ bool compareArr(string, string, int, int &, int &);
 string AI(int, int);
 void display(int, int, int [], int []);
 void counter(int, int, int [], int []);
-void breakCode(string, string);
+bool breakCode(string, string);
 
 
 int main()
@@ -190,9 +190,27 @@ void display(int coSpot, int amCor, int rightArr[], int wrongArr[])
 }
 
 
-void breakCode(string AIguess, string code) //AIguess is from the AI function and code is from the generated code 
+bool breakCode(string AIguess, string code) //AIguess is from the AI function and code is from the generated code 
 {
     /*  this function will get the AI guess and compare the values with the code 
         whenever the function detects the that the AIguess is in the right spot then it will add that element to another array called guessCode which will slowly have the correct code through each iteration 
     */ 
+   string codeBreak;
+
+   for (int i = 0; i < 4; i++)
+   {
+        if (AIguess[i] == code[i])
+        {
+            codeBreak += AIguess[i];
+        } else if (codeBreak[i] == code[i])
+        {
+            return true;                //CodeBreak and code need to be exact in order to be true then be able to return true
+        } else if (codeBreak[i] != code[i])
+        {
+            return false; 
+        }
+   }
+
+   
+
 }
