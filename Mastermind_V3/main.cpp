@@ -34,44 +34,24 @@ int main()
     int counterGuess = 0; 
     int rightArr[5] = {0, 0, 0, 0, 0};
     int wrongArr[5] = {0, 0, 0, 0, 0};
+    bool codeBroken;
 
     srand(time(NULL));              // Generates Random Number 
 
    
     code = generatedArr(len);             // Generates a random Array that will be compared to the input array to win  
     
-    cout << "Hello User this program will guess a code by going from 0000-9999 " << endl;
-    cout << "1) Random Code " << endl;
-    cout << "2) User Code " << endl; 
-    cin >> choice;
-
-    if (choice == 1)
+    cout << "Hello User this program will guess the code in 9 guesses or less " << endl;
+    do
     {
-        cout << "Code Guess #right #right in wrong spot Sum" << endl; 
-        for (int i = 0; i < 10000; i++)
-        {
-            guess = AI(len, counterGuess); 
-            compareArr(code, guess, len, amCor, coSpot);
-            cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
-            counter(coSpot, amCor, rightArr, wrongArr); 
-        }
-        display(coSpot, amCor, rightArr, wrongArr); 
-    } else if (choice == 2)
-    {
-        cout << "Please enter Code on this line: ";
-        cin >> userCode; 
-        cout << "Code Guess #right #right in wrong spot Sum" << endl; 
-        for (int i = 0; i < 10000; i++)
-        {
-            guess = AI(len, counterGuess); 
-            compareArr(userCode, guess, len, amCor, coSpot);
-            cout << userCode << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
-            counter(coSpot, amCor, rightArr, wrongArr); 
-        }
-        display(coSpot, amCor, rightArr, wrongArr); 
-    }
+        guess = AI(len, counterGuess);
+        
+        compareArr(code, guess, len, amCor, coSpot);
+        bool codeBroken = breakCode(guess, code);
 
+    } while (codeBroken == false);
     
+
 }
 
 
@@ -211,6 +191,6 @@ bool breakCode(string AIguess, string code) //AIguess is from the AI function an
         }
    }
 
-   
+    return false; 
 
 }
