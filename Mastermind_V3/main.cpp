@@ -16,7 +16,7 @@ using namespace std;
 
 string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(string, string, int, int &, int &);
-string AI(int, int);
+string AI(int, int &, string);
 void display(int, int, int [], int []);
 void counter(int, int, int [], int []);
 bool breakCode(string, string);
@@ -35,6 +35,7 @@ int main()
     int rightArr[5] = {0, 0, 0, 0, 0};
     int wrongArr[5] = {0, 0, 0, 0, 0};
     bool codeBroken;
+    string AIguess = "    ";
 
     srand(time(NULL));              // Generates Random Number 
 
@@ -44,13 +45,13 @@ int main()
     cout << "Hello User this program will guess the code in 9 guesses or less " << endl;
     do
     {
-        guess = AI(len, counterGuess);
+        guess = AI(len, counterGuess, AIguess);
         
         compareArr(code, guess, len, amCor, coSpot);
+        cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
         bool codeBroken = breakCode(guess, code);
-
+        cout << "Total Guesses: " << counterGuess << endl;
     } while (codeBroken == false);
-    
 
 }
 
@@ -104,18 +105,18 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
    
 }
 
-string AI(int len, int counterGuess) // The main purpose of this function is to create a guess created by the AI 
+string AI(int len, int &counterGuess, string AIguess) // The main purpose of this function is to create a guess created by the AI 
 {
 
-    string guess = "0000";
-    guess[0] = counterGuess; 
-    guess[1] = counterGuess; 
-    guess[2] = counterGuess; 
-    guess[3] = counterGuess; 
+
+    AIguess[0] = counterGuess + '0'; 
+    AIguess[1] = counterGuess + '0'; 
+    AIguess[2] = counterGuess + '0'; 
+    AIguess[3] = counterGuess + '0'; 
 
     counterGuess++; 
 
-    return guess; 
+    return AIguess; 
 }
 
 void counter(int coSpot, int amCor, int rightArr[], int wrongArr[])
@@ -175,13 +176,13 @@ bool breakCode(string AIguess, string code) //AIguess is from the AI function an
     /*  this function will get the AI guess and compare the values with the code 
         whenever the function detects the that the AIguess is in the right spot then it will add that element to another array called guessCode which will slowly have the correct code through each iteration 
     */ 
-   string codeBreak;
+   string codeBreak = "    ";
 
    for (int i = 0; i < 4; i++)
    {
         if (AIguess[i] == code[i])
         {
-            codeBreak += AIguess[i];
+            codeBreak[i] += AIguess[i];
         } else if (codeBreak[i] == code[i])
         {
             return true;                //CodeBreak and code need to be exact in order to be true then be able to return true
