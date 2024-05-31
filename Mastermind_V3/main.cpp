@@ -1,3 +1,4 @@
+
 /*
  *Author: Julian Vara
  *Purpose: This program is show that the #right and #right in wrong spot work 
@@ -16,7 +17,7 @@ using namespace std;
 
 string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(string, string, int, int &, int &);
-string AI(int, int &, string);
+string AI(int, int &, string, int, int);
 void display(int, int, int [], int []);
 void counter(int, int, int [], int []);
 bool breakCode(string, string);
@@ -45,7 +46,7 @@ int main()
     cout << "Hello User this program will guess the code in 9 guesses or less " << endl;
     do
     {
-        guess = AI(len, counterGuess, AIguess);
+        guess = AI(len, counterGuess, AIguess, coSpot, amCor);
         
         compareArr(code, guess, len, amCor, coSpot);
         cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
