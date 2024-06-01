@@ -1,2 +1,11 @@
 *NEED TO DO* 
 - create an AI function that will guess code 
+
+string AI()
+{
+    - the first guess of the AI will be 0000 
+    - then the other guesses would be incremeanted from the first element 
+        ex: 0000
+            1000
+            2000 -> until the AI function gets a c
+}

@@ -17,25 +17,22 @@ using namespace std;
 
 string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(string, string, int, int &, int &);
-string AI(int, int &, string, int, int);
-void display(int, int, int [], int []);
-void counter(int, int, int [], int []);
-bool breakCode(string, string);
+string AI(int, int, string, int, int &);
+
+
 
 
 int main()
 {
     const int len = 4; 
     bool dup;
+    int counter = 0;
     int tries = 10;
     int amCor = 0;      // amCor = right # wrong place
     int coSpot = 0;     // coSpot = correct spot  
     string guess, code, userCode; 
     int choice = 0; 
     int counterGuess = 0; 
-    int rightArr[5] = {0, 0, 0, 0, 0};
-    int wrongArr[5] = {0, 0, 0, 0, 0};
-    bool codeBroken;
     string AIguess = "    ";
 
     srand(time(NULL));              // Generates Random Number 
@@ -46,13 +43,13 @@ int main()
     cout << "Hello User this program will guess the code in 9 guesses or less " << endl;
     do
     {
-        guess = AI(len, counterGuess, AIguess, coSpot, amCor);
+        guess = AI(coSpot, amCor, AIguess, counterGuess, counter);
         
         compareArr(code, guess, len, amCor, coSpot);
         cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
-        bool codeBroken = breakCode(guess, code);
-        cout << "Total Guesses: " << counterGuess << endl;
-    } while (codeBroken == false);
+        
+        
+    } while (compareArr(code, guess, len, amCor, coSpot));
 
 }
 
@@ -106,93 +103,41 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
    
 }
 
-string AI(int len, int &counterGuess, string AIguess) // The main purpose of this function is to create a guess created by the AI 
+string AI(int coSpot, int amCor, string AIguess, int counterGuess, int &counter) // The main purpose of this function is to create a guess created by the AI 
 {
+    string coDigit = "    "; // Settings coDigits to 4 length to test later to make sure that it holds the correct amount of numbers 
+    int j = 0;
+    if (counter < 4)
+    {
 
+        AIguess[0] = counterGuess + '0'; 
+        AIguess[1] = counterGuess + '0'; 
+        AIguess[2] = counterGuess + '0'; 
+        AIguess[3] = counterGuess + '0'; 
 
-    AIguess[0] = counterGuess + '0'; 
-    AIguess[1] = counterGuess + '0'; 
-    AIguess[2] = counterGuess + '0'; 
-    AIguess[3] = counterGuess + '0'; 
-
-    counterGuess++; 
+        if (coSpot > 0)
+        {
+            while (counter <= coSpot) // NEED TO FIGURE OUT HOW TO GET THE ADD THE coDigits without changing the elements aready inside coDigit
+            {
+                coDigit[counter] += counterGuess;
+            }   
+            counter += coSpot; 
+        }
+        counterGuess++; 
+        
+    }
+    if (counter == 4) // Now coDigit should be filled up with the all the digits in the code 
+    {   
+        
+        // need to check for the first digit if it is in the correct spot 
+        AIguess[0] = coDigit[j] + '0';
+        j++; 
+        if (j < 3)
+        {
+            AIguess[0] = coDigit[3];
+        }
+        
+    }
 
     return AIguess; 
-}
-
-void counter(int coSpot, int amCor, int rightArr[], int wrongArr[])
-{
-    if (coSpot == 0)
-    {
-        rightArr[0]++;
-    } else if (coSpot == 1)
-    {
-        rightArr[1]++;
-    } else if (coSpot == 2)
-    {
-        rightArr[2]++;
-    } else if (coSpot == 3)
-    {
-        rightArr[3]++; 
-    } else if (coSpot == 4)
-    {
-        rightArr[4]++;
-    }
-
-    if (amCor == 0)
-    {
-        wrongArr[0]++;
-    } else if (amCor == 1)
-    {
-        wrongArr[1]++;
-    } else if (amCor == 2)
-    {
-        wrongArr[2]++;
-    } else if (amCor == 3)
-    {
-        wrongArr[3]++; 
-    } else if (amCor == 4)
-    {
-        wrongArr[4]++;
-    }
-        
-}
-
-void display(int coSpot, int amCor, int rightArr[], int wrongArr[])
-{
-
-    for (int i = 0; i < 5; i++)
-    {
-        cout << "The amount RIGHT in position " << i << ": " << rightArr[i] << endl;
-    }
-    for (int i = 0; i < 5; i++)
-    {
-        cout << "The amount RIGHT in WRONG in position " << i << ": " << wrongArr[i] << endl;
-    }
-}
-
-
-bool breakCode(string AIguess, string code) //AIguess is from the AI function and code is from the generated code 
-{
-    /*  this function will get the AI guess and compare the values with the code 
-        whenever the function detects the that the AIguess is in the right spot then it will add that element to another array called guessCode which will slowly have the correct code through each iteration 
-    */ 
-   string codeBreak = "    ";
-
-   for (int i = 0; i < 4; i++)
-   {
-        if (AIguess[i] == code[i])
-        {
-            codeBreak[i] += AIguess[i];
-        } else if (codeBreak[i] == code[i])
-        {
-            return true;                //CodeBreak and code need to be exact in order to be true then be able to return true
-        } else if (codeBreak[i] != code[i])
-        {
-            return false; 
-        }
-   }
-
-    return false; 
-
 }
