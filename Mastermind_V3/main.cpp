@@ -17,7 +17,7 @@ using namespace std;
 
 string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(string, string, int, int &, int &);
-string AI(int, int, string, int, int &);
+string AI(int, int, string, int &, int &);
 
 
 
@@ -103,11 +103,11 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
    
 }
 
-string AI(int coSpot, int amCor, string AIguess, int counterGuess, int &counter) // The main purpose of this function is to create a guess created by the AI 
+string AI(int coSpot, int amCor, string AIguess, int &counterGuess, int &counter) // The main purpose of this function is to create a guess created by the AI 
 {
     string coDigit = "    "; // Settings coDigits to 4 length to test later to make sure that it holds the correct amount of numbers 
     int j = 0;
-    if (counter < 4)
+    if (counter < 4) // Version 1 
     {
 
         AIguess[0] = counterGuess + '0'; 
@@ -117,14 +117,19 @@ string AI(int coSpot, int amCor, string AIguess, int counterGuess, int &counter)
 
         if (coSpot > 0)
         {
-            while (counter <= coSpot) // NEED TO FIGURE OUT HOW TO GET THE ADD THE coDigits without changing the elements aready inside coDigit
+            for (int i = 0; i < coSpot; i++)
             {
-                coDigit[counter] += counterGuess;
-            }   
+                coDigit[i] += counterGuess;
+            }
             counter += coSpot; 
         }
         counterGuess++; 
         
+    }
+
+    for (int i = 0; i < 4; i++) // changing the contains of the AIguess to the correct digits 
+    {
+        AIguess[i] = coDigit[i];
     }
     if (counter == 4) // Now coDigit should be filled up with the all the digits in the code 
     {   
