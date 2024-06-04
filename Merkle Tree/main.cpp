@@ -1,18 +1,18 @@
 #include <iostream> 
+#include <string> 
 
 using namespace std; 
 
 unsigned int RSHash(const std::string& str);
-string hash0(string, string);
-string hash1(string, string); 
-string topHash(string, string);
+string add(string, string);
+
 
 int main()
 {
     string L1, L2, L3, L4;
     string hL1, hL2, hL3, hL4;
+    string HASH10, HASH00;
     string HASH1, HASH0;
-    string topHASH1, topHASH0;
     string finalHash;
     L1 = "Then out spake brave Horatius, The Captain of the Gate:";
     L2 = "\"To every man upon this earth Death cometh soon or late.";
@@ -21,28 +21,26 @@ int main()
     hL1 = RSHash(L1);
     hL2 = RSHash(L2);
     hL3 = RSHash(L3);
-    hL4 = RSHash(L4);
+    hL4 = RSHash(L4); //Level 1 is hashed 
 
-    cout << "L1 0-0: " << hL1 << endl; 
+    cout << "L1 0-0: " << hL1 << endl; // Printed Level 1 
     cout << "L2 0-1: " << hL2 << endl;
     cout << "L3 1-0: " << hL3 << endl; 
     cout << "L4 1-1: " << hL4 << endl;  
 
-    HASH0 = hash0(hL1, hL2);
-    HASH1 = hash1(hL3, hL4);
+    HASH00 = add(hL1, hL2); // Combining level 1 left 
+    HASH10 = add(hL3, hL4); // Combing level 1 right
 
-    cout << "Hash 0: " << HASH0 << endl; 
-    cout << "Hash 1: " << HASH1 << endl;  
+    HASH0 = RSHash(HASH00); // Hashing combined level 1 left 
+    HASH1 = RSHash(HASH10); // Hashing combined level 1 right
 
-    topHASH0 = RSHash(HASH0);
-    topHASH1 = RSHash(HASH1);
-
-    finalHash = topHash(topHASH0, topHASH1);
-
-    cout << "Top Hash: " << finalHash << endl;
+    cout << "Hash 0: " << HASH0 << endl;  // Printing level 2 left 
+    cout << "Hash 1: " << HASH1 << endl;  // Printing level 2 right
 
 
+    finalHash = add(HASH0, HASH1); // Combining level 2 
 
+    cout << "Top Hash: " << RSHash(finalHash) << endl; // Printing and hashing level 2 which is now the top 
 }
 
 unsigned int RSHash(const std::string& str)
@@ -60,21 +58,8 @@ unsigned int RSHash(const std::string& str)
    return hash;
 }
 
-string hash0(string hL1, string hL2)
+string add(string hL1, string hL2)
 {
-    string Hash0 = hL1 + hL2;
-    return Hash0; 
-}
-
-
-string hash1(string hL3, string hL4)
-{
-    string Hash1 = hL3 + hL4;
-    return Hash1; 
-}
-
-string topHash(string topHASH0, string topHASH1)
-{   
-    string hash = topHASH0 + topHASH1;
+    string hash = hL1 + hL2;
     return hash; 
 }
