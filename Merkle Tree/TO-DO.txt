@@ -1,0 +1,11 @@
+** This program will get 4 different inputs and create a merkle tree with that data
+
+
+- Hash each L1, L2... by themselves 
+- Add L1 and L2 together and L3 and L4 together 
+    - hash L1+L2 and L3+L4 indendntly 
+- Then add the hash(L1+L2) and hash(L3+L4) 
+    - This creates the top hash 
+
+- Print out everytime you hash something and label it per the picture on wikipedia 
+
