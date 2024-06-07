@@ -1,9 +1,7 @@
 
 /*
  *Author: Julian Vara
- *Purpose: This program is show that the #right and #right in wrong spot work 
-            also how a simple AI that guess just be incrementing by +1 until it 
-            guesses the correct value and it will stop 
+ *Purpose: Creating an AI for the Mastermind game to guess the code under 16 guesses 
  *Date: 4/30/24
  */
  
@@ -17,7 +15,7 @@ using namespace std;
 
 string generatedArr(int);                            // This functions creates the generated Arr that will have the code the user has to guess 
 bool compareArr(string, string, int, int &, int &);
-string AI(int, int, string, int &, int &);
+string AI(int, int, string, string &, string &, int &, int &, int &);
 
 
 
@@ -34,6 +32,10 @@ int main()
     int choice = 0; 
     int counterGuess = 0; 
     string AIguess = "    ";
+    string coDigit; // Settings coDigits to 4 length to test later to make sure that it holds the correct amount of numbers 
+    int counter1 = 0;
+    string coPosition = "xxxx";
+
 
     srand(time(NULL));              // Generates Random Number 
 
@@ -43,10 +45,10 @@ int main()
     cout << "Hello User this program will guess the code in 9 guesses or less " << endl;
     do
     {
-        guess = AI(coSpot, amCor, AIguess, counterGuess, counter);
+        guess = AI(coSpot, amCor, AIguess, coDigit, coPosition, counterGuess, counter, counter1);
         
         compareArr(code, guess, len, amCor, coSpot);
-        cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << endl;
+        cout << code << " " << guess << "      " << coSpot << "          " << amCor << "             " << amCor + coSpot << "                coDigit: " << coDigit << endl;
         
         
     } while (compareArr(code, guess, len, amCor, coSpot));
@@ -103,13 +105,12 @@ bool compareArr(string code, string guess, int len, int &amCor, int &coSpot)
    
 }
 
-string AI(int coSpot, int amCor, string AIguess, int &counterGuess, int &counter) // The main purpose of this function is to create a guess created by the AI 
+string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosition, int &counterGuess, int &counter, int &counter1) // The main purpose of this function is to create a guess created by the AI 
 {
-    string coDigit = "    "; // Settings coDigits to 4 length to test later to make sure that it holds the correct amount of numbers 
     int j = 0;
+    
     if (counter < 4) // Version 1 
     {
-
         AIguess[0] = counterGuess + '0'; 
         AIguess[1] = counterGuess + '0'; 
         AIguess[2] = counterGuess + '0'; 
@@ -117,32 +118,99 @@ string AI(int coSpot, int amCor, string AIguess, int &counterGuess, int &counter
 
         if (coSpot > 0)
         {
+            counterGuess --; // Previous Guess 
+            
             for (int i = 0; i < coSpot; i++)
             {
-                coDigit[i] += counterGuess;
-            }
-            counter += coSpot; 
+                coDigit += counterGuess + '0';
+            } 
+            counterGuess ++; // Current Guess 
+            counter += coSpot; // Once counter equals 4 then this variable will stay at 4 to skip all of this code 
         }
-        counterGuess++; 
+        counterGuess++; // Next Guess 
         
     }
 
-    for (int i = 0; i < 4; i++) // changing the contains of the AIguess to the correct digits 
+
+    /*
+    the correct amount of digits is correct Now I need to place the correct digits in the right position 
+    
+        - In order to place digits into right position I need a new string that will have all x's and then I position the first element from coDigit until I get a correct
+        spot 
+        */
+
+    if (counter == 4)    
     {
-        AIguess[i] = coDigit[i];
-    }
-    if (counter == 4) // Now coDigit should be filled up with the all the digits in the code 
-    {   
         
-        // need to check for the first digit if it is in the correct spot 
-        AIguess[0] = coDigit[j] + '0';
-        j++; 
-        if (j < 3)
+        coPosition[0] = coDigit[counter1];
+        counter1++;
+        if (coSpot == 1)
         {
-            AIguess[0] = coDigit[3];
+            counter1 -= 2; // Previous 2 guesses
+            coPosition[0] = coDigit[counter1];
+            counter1 = 0;
+            counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
+            
         }
-        
+        //NEED TO UPDATE THE AIguess
+        for (int i = 0; i < 4; i++)
+            {
+                AIguess[i] = coPosition[i];
+            } 
+    }  
+    else if (counter == 5)
+    {
+        coPosition[1] = coDigit[counter1];
+        counter1++; 
+        if (coSpot == 2)
+        {
+            counter1 -= 2;
+            coPosition[1] = coDigit[counter1];
+            counter1 = 0;
+            counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
+           
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            AIguess[i] = coPosition[i];
+        }
     }
+    else if (counter == 6)
+    {
+        coPosition[2] = coDigit[counter1];
+        counter1++; 
+        if (coSpot == 3)
+        {
+            counter1 -= 2;
+            coPosition[1] = coDigit[counter1];
+            counter1 = 0;
+            counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
+           
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            AIguess[i] = coPosition[i];
+        }
+    }
+    else if (counter == 7)
+    {
+        coPosition[3] = coDigit[counter1];
+        counter1++; 
+        if (coSpot == 2)
+        {
+            counter1 -= 2;
+            coPosition[3] = coDigit[counter1];
+            counter1 = 0;
+            counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
+            
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            AIguess[i] = coPosition[i];
+        }
+    }
+    
+     
 
     return AIguess; 
 }

@@ -4,8 +4,15 @@
 string AI()
 {
     - the first guess of the AI will be 0000 
-    - then the other guesses would be incremeanted from the first element 
-        ex: 0000
-            1000
-            2000 -> until the AI function gets a c
+                                        1111
+                                        2222
+    - If (counter < 4)
+    {
+        - AIguess += 1; 
+        if(coSpot > 0)
+        {
+            
+        }
+    }
+    CODE: 0120 
 }
