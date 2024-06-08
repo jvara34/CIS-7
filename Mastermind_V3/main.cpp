@@ -32,12 +32,12 @@ int main()
     int choice = 0; 
     int counterGuess = 0; 
     string AIguess = "    ";
-    string coDigit; // Settings coDigits to 4 length to test later to make sure that it holds the correct amount of numbers 
+    string coDigit; 
     int counter1 = 0;
     string coPosition = "xxxx";
 
 
-    srand(time(NULL));              // Generates Random Number 
+    srand(static_cast<unsigned int>(time(0)));              // Generates Random Number 
 
    
     code = generatedArr(len);             // Generates a random Array that will be compared to the input array to win  
@@ -58,10 +58,10 @@ int main()
 
 string generatedArr(int len)
 {   
-    string code = "0000";
-    for (int i = 0; i < len; i++)       // for loop generates a random number 
+    string code = "0000";   
+    for(int i = 0; i < code.length(); i++)
     {
-        code[i] = rand() % len + '0';
+        code[i] = rand() % 10 + '0';
     }
     return code; 
 }
@@ -128,6 +128,8 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
             counter += coSpot; // Once counter equals 4 then this variable will stay at 4 to skip all of this code 
         }
         counterGuess++; // Next Guess 
+
+        return AIguess; 
         
     }
 
@@ -138,6 +140,8 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
         - In order to place digits into right position I need a new string that will have all x's and then I position the first element from coDigit until I get a correct
         spot 
         */
+
+   
 
     if (counter == 4)    
     {
@@ -150,13 +154,13 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
             coPosition[0] = coDigit[counter1];
             counter1 = 0;
             counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
-            
         }
         //NEED TO UPDATE THE AIguess
         for (int i = 0; i < 4; i++)
-            {
-                AIguess[i] = coPosition[i];
-            } 
+        {
+            AIguess[i] = coPosition[i];
+        } 
+        
     }  
     else if (counter == 5)
     {
@@ -182,7 +186,7 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
         if (coSpot == 3)
         {
             counter1 -= 2;
-            coPosition[1] = coDigit[counter1];
+            coPosition[2] = coDigit[counter1];
             counter1 = 0;
             counter++; // this makes this if statement unusable for the next function call to focus on the next element of guesses 
            
@@ -196,7 +200,7 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
     {
         coPosition[3] = coDigit[counter1];
         counter1++; 
-        if (coSpot == 2)
+        if (coSpot == 4)
         {
             counter1 -= 2;
             coPosition[3] = coDigit[counter1];
@@ -212,5 +216,5 @@ string AI(int coSpot, int amCor, string AIguess, string &coDigit, string &coPosi
     
      
 
-    return AIguess; 
+    return AIguess;  
 }
